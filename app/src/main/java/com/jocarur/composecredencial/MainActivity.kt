@@ -48,6 +48,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * I didn't knew but you can type comp and get a full composable function
+ */
+@Composable
+fun comp() {
+    
+}
+
 @Composable
 private fun CreateCredentials() {
     /**
@@ -74,6 +82,10 @@ private fun CreateCredentials() {
                 Text(text = "Portafolio")
             }
 
+            /**
+             * Looks like the code it's updating constantly like unity, i don't have to
+             * create a specific method to update the code, may be the @Composable
+             */
             if (showingInfo.value){
                 Content()
             } else {
