@@ -1,7 +1,6 @@
 package com.jocarur.composecredencial
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
@@ -34,6 +33,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            /**
+             * Here we define the theme of the activity
+             */
             ComposeCredencialTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -48,9 +50,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun CreateCredentials() {
+    /**
+     * Here we're using the remember lambda to keep track of the state of our button
+     */
     val showingInfo = remember {
         mutableStateOf(false)
     }
+
     Surface (modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight()
@@ -71,9 +77,7 @@ private fun CreateCredentials() {
             if (showingInfo.value){
                 Content()
             } else {
-                Box() {
-
-                }
+                Box {}
             }
         }
     }
@@ -81,6 +85,9 @@ private fun CreateCredentials() {
 
 @Composable
 private fun SetImagePicture(modifier: Modifier = Modifier) {
+    /**
+     * Here we have a normal container, i don't think this one has a way to align the views inside
+     */
     Surface(
         modifier = modifier
             .padding(5.dp),
@@ -88,9 +95,12 @@ private fun SetImagePicture(modifier: Modifier = Modifier) {
         border = BorderStroke(0.5.dp, Color.LightGray),
         shadowElevation = 2.dp
     ) {
+        /**
+         * Here we have the classic image view
+         */
         Image(
             modifier = modifier,
-            painter = painterResource(id = R.drawable.ic_launcher_background),
+            painter = painterResource(id = R.drawable.profile),
             contentDescription = "profile picture",
             contentScale = ContentScale.Crop
         )
@@ -117,6 +127,9 @@ private fun SetPersonalData() {
 
 @Composable
 private fun Content() {
+    /**
+     * A box is basically an Horizontal linear layout
+     */
     Box(modifier = Modifier
         .fillMaxWidth()
         .fillMaxHeight()
@@ -136,8 +149,19 @@ private fun Content() {
 
 @Composable
 private fun Portafolio(data: List<String>) {
-    LazyColumn { 
+    /**
+     * Here we start a RecycleView Compose Style
+     * The lazy mean that it'll reuse the columns and save processing power and Ram
+     */
+    LazyColumn {
+        /**
+         * The items mean that it catches the type of array that we need, in this case a String
+         */
         items(data) { item ->
+            /**
+             * todo check this statement
+             * As far as i can see a Row is a vertical linear layout
+             */
             Row(modifier = Modifier.padding(8.dp)) {
                 SetImagePicture(modifier = Modifier.size(60.dp))
                 Column(modifier = Modifier
@@ -154,6 +178,9 @@ private fun Portafolio(data: List<String>) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
+    /**
+     * The default preview is a super method that shows what we're wonking in the live edit
+     */
     ComposeCredencialTheme {
         CreateCredentials()
     }
